@@ -1,6 +1,8 @@
 # demoPhoneStore
 demo application of a cell phone store with user authentication and cart
+
 Tools: Ionic and Firebase for backend
+
 Project:
 1. Allow authenticated signups, with email confirmation, and logins through a signup
 page and login page, respectively.
