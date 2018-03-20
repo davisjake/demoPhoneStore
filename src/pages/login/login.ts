@@ -19,29 +19,27 @@ export class LoginPage {
     console.log('ionViewDidLoad LoginPage');
   }
 
-  async login(user: User) { //Uses promise so set as async, can load when done at server side
-    this.afAuth.auth.signInWithEmailAndPassword(user.email, user.password)
-      .catch(function(error) {
-        // Handle Errors here.
-        var errorCode = error.code;
-        var errorMessage = error.message;
-        if (errorCode === 'auth/wrong-password') {
-          alert('Wrong password.');
-        } else {
-          alert(errorMessage);
-        }
-        console.log(error);
-      })
-      .then( loggedUser => {
-        if(loggedUser.emailVerified) {
-          //push to next page
-          console.log("You may enter");
-          this.navCtrl.setRoot(ListPage);
-        }
-        else {
-          alert("Email is not yet verified, please verify your email address and then log in.");
-        }
-      });
+  async login(user: User) { //Uses promise so set as async
+    try {
+      await this.afAuth.auth.signInWithEmailAndPassword(user.email, user.password)
+        .then( loggedUser => {
+          if(loggedUser.emailVerified) { //push to Phone List page
+            console.log("You may enter");
+            this.navCtrl.setRoot(ListPage);
+          }
+          else {
+            alert("Email is not yet verified, please verify your email address and then log in.");
+          }
+        });
+    }
+    catch(error) {
+      if (error.code === 'auth/wrong-password') {
+        alert('Wrong password.');
+      } else {
+        alert(error.message);
+      }
+      console.log(error);
+    }
   }
 
   register() { //push register page to user

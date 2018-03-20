@@ -21,8 +21,7 @@ export class MyApp {
     this.initializeApp();
 
     // used for an example of ngFor and navigation
-    this.pages = [
-      { title: 'Login', component: LoginPage },
+    this.pages = [      
       { title: 'List', component: ListPage } //add cart to this section
     ];
 
