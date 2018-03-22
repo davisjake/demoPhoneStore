@@ -18,8 +18,7 @@ import { AngularFireAuth } from 'angularfire2/auth'; //should abstract to servic
   templateUrl: 'register.html',
 })
 export class RegisterPage {
-  user = {} as User;
-  private usersRef = this.afDb.list<User>('/users/'); //list of type User based on model
+  user = {} as User;  
 
   constructor(private afDb: AngularFireDatabase, private afAuth: AngularFireAuth, public navCtrl: NavController, public navParams: NavParams) {
   }
@@ -34,11 +33,12 @@ export class RegisterPage {
         newUser => {
           console.log(newUser); //grab user info. for testing, make sure works
           if(newUser) { //If User created
-            this.usersRef.push({  //create user reference in db with empty cart
-              uid: newUser.uid,
-              email : user.email,
+            this.afDb.list<any>('/users').update(  //create user reference in db with empty cart
+              newUser.uid,
+              { email : user.email,
               cart : { empty : true }
-            });
+              }
+            );
             newUser.sendEmailVerification().then(function() { //send verification email
               console.log("Verification Email Sent");
             }).catch(function(e) {
