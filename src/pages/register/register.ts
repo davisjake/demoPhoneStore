@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { User } from '../../models/user';
 import { LoginPage } from '../login/login';
+import { AngularFireDatabase } from 'angularfire2/database';
 import { AngularFireAuth } from 'angularfire2/auth'; //should abstract to service for production app
 
 /**
@@ -18,8 +19,9 @@ import { AngularFireAuth } from 'angularfire2/auth'; //should abstract to servic
 })
 export class RegisterPage {
   user = {} as User;
+  private usersRef = this.afDb.list<User>('/users/'); //list of type User based on model
 
-  constructor(private afAuth: AngularFireAuth, public navCtrl: NavController, public navParams: NavParams) {
+  constructor(private afDb: AngularFireDatabase, private afAuth: AngularFireAuth, public navCtrl: NavController, public navParams: NavParams) {
   }
 
   ionViewDidLoad() {
@@ -32,6 +34,11 @@ export class RegisterPage {
         newUser => {
           console.log(newUser); //grab user info. for testing, make sure works
           if(newUser) { //If User created
+            this.usersRef.push({  //create user reference in db with empty cart
+              uid: newUser.uid,
+              email : user.email,
+              cart : { empty : true }
+            });
             newUser.sendEmailVerification().then(function() { //send verification email
               console.log("Verification Email Sent");
             }).catch(function(e) {
