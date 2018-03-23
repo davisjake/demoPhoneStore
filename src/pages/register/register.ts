@@ -18,7 +18,7 @@ import { AngularFireAuth } from 'angularfire2/auth'; //should abstract to servic
   templateUrl: 'register.html',
 })
 export class RegisterPage {
-  user = {} as User;  
+  user = {} as User;
 
   constructor(private afDb: AngularFireDatabase, private afAuth: AngularFireAuth, public navCtrl: NavController, public navParams: NavParams) {
   }

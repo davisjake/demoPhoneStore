@@ -1,0 +1,39 @@
+<ion-header>
+  <ion-navbar color="primary">
+    <ion-title>Phone Details</ion-title>
+    <ion-buttons end>
+      <button navPush="ShoppingCartPage" ion-button icon-only>
+        <ion-icon name="cart"></ion-icon>
+      </button>
+    </ion-buttons>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+  <h3 text-center *ngIf="selectedPhone">
+    {{selectedPhone.model}}
+  </h3>
+  <div class="manufacture">
+    Manufacture: {{selectedPhone.manufacture}}
+  </div>
+  <div class="serial">
+    Serial #: {{selectedPhone.serialNumber}}
+  </div>
+  <div class="price">
+    Price: ${{selectedPhone.price}}
+  </div>
+  <div class="introYear">
+    Introduce in: {{selectedPhone.introYear}}
+  </div>
+  <ion-list>
+    <ion-list-header>
+      Features:
+    </ion-list-header>
+    <h6 ion-item *ngFor="let feature of selectedPhone.features">
+      {{feature}}
+    </h6>
+  </ion-list>
+  <button ion-button color="secondary" (click)="addToCart()">
+    Add To Cart
+  </button>
+</ion-content>

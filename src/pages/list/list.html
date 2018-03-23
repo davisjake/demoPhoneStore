@@ -1,23 +1,30 @@
 <ion-header>
-  <ion-navbar>
+  <ion-navbar color="primary">
     <button ion-button menuToggle>
       <ion-icon name="menu"></ion-icon>
     </button>
-    <ion-title>List</ion-title>
+    <ion-title>Demo Phone Store Application</ion-title>
+    <ion-buttons end>
+      <button navPush="ShoppingCartPage" ion-button>
+        <ion-icon name="cart"></ion-icon>
+      </button>
+    </ion-buttons>
   </ion-navbar>
 </ion-header>
 
 <ion-content>
   <ion-list>
-    <button ion-item *ngFor="let item of items" (click)="itemTapped($event, item)">
-      <ion-icon [name]="item.icon" item-start></ion-icon>
-      {{item.title}}
-      <div class="item-note" item-end>
-        {{item.note}}
+    <ion-list-header>
+      Available Phones
+    </ion-list-header>
+    <button ion-item *ngFor="let phone of phones | async" (click)="pushPhoneDetails($event, phone)">
+      <h1 font-size-large>{{phone.model}}</h1>
+      <div class="phoneSerial">
+        Serial #: {{phone.serialNumber}}
+      </div>
+      <div class="phonePrice" item-end>
+        Price: ${{phone.price}}
       </div>
     </button>
   </ion-list>
-  <div *ngIf="selectedItem" padding>
-    You navigated here from <b>{{selectedItem.title}}</b>
-  </div>
 </ion-content>
