@@ -4,12 +4,22 @@
     <button ion-button menuToggle>
       <ion-icon name="menu"></ion-icon>
     </button>
-    <ion-title>shoppingCart</ion-title>
+    <ion-title>Cart</ion-title>
   </ion-navbar>
 
 </ion-header>
 
 
 <ion-content padding>
-
+  <ion-list>
+    <ion-list-header>
+      Phones currently in Cart:
+    </ion-list-header>
+    <ion-item *ngFor="let phone of cartRef | async">
+      <ion-item-divider font-size-small>
+        {{phone.model}}
+      </ion-item-divider>
+      <p font-size-small>{{phone.description}}<br>Price: ${{phone.price}}</p>
+    </ion-item>
+  </ion-list>
 </ion-content>

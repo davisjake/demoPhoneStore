@@ -1,7 +1,8 @@
 import { Component } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
-import { AngularFireDatabase } from 'angularfire2/database';
+import { AngularFireDatabase, FirebaseListObservable } from 'angularfire2/database';
 import { PhoneDetailsPage } from '../phoneDetails/phoneDetails';
+import { Phone } from '../../models/phone';
 import { Observable } from 'rxjs/Rx';
 
 
@@ -11,12 +12,11 @@ import { Observable } from 'rxjs/Rx';
 })
 export class ListPage {
   phones : Observable<any[]>;
+  phoneListRef$: FirebaseListObservable<Phone[]>
 
   constructor(private afDb: AngularFireDatabase, public navCtrl: NavController, public navParams: NavParams) {
     this.phones = this.afDb.list('phones').valueChanges();
-    this.phones.forEach((phone) => {
-        console.log(phone);
-    });
+    this.phoneListRef$ = this.afDb.list('phones');
   }
 
   pushPhoneDetails(event, phone) { //push phoneDetialPage when phone clicked from list

@@ -10,21 +10,23 @@
 </ion-header>
 
 <ion-content padding>
-  <h3 text-center *ngIf="selectedPhone">
+  <h3 text-center font-size-large *ngIf="selectedPhone">
     {{selectedPhone.model}}
   </h3>
-  <div class="manufacture">
-    Manufacture: {{selectedPhone.manufacture}}
-  </div>
-  <div class="serial">
-    Serial #: {{selectedPhone.serialNumber}}
-  </div>
-  <div class="price">
-    Price: ${{selectedPhone.price}}
-  </div>
-  <div class="introYear">
-    Introduce in: {{selectedPhone.introYear}}
-  </div>
+  <ion-list>
+    <ion-list-header>
+      {{selectedPhone.model}} Information
+    </ion-list-header>
+    <h5 ion-item class="manufacture">
+      Manufacture: {{selectedPhone.manufacture}}
+    </h5>
+    <h5 ion-item class="serial">
+      Serial #: {{selectedPhone.serialNumber}}
+    </h5>
+    <h5 ion-item class="introYear">
+      Introduce in: {{selectedPhone.introYear}}
+    </h5>
+  </ion-list>
   <ion-list>
     <ion-list-header>
       Features:
@@ -33,7 +35,10 @@
       {{feature}}
     </h6>
   </ion-list>
-  <button ion-button color="secondary" (click)="addToCart()">
+  <h2 font-size-large text-center class="price">
+    Price: ${{selectedPhone.price}}
+  </h2>
+  <button ion-button block color="secondary" (click)="addToCart()">
     Add To Cart
   </button>
 </ion-content>

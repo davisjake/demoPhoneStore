@@ -1,7 +1,8 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, ToastController } from 'ionic-angular';
 import { AngularFireAuth } from 'angularfire2/auth';
-import { AngularFireDatabase } from 'angularfire2/database';
+import { AngularFireDatabase, FirebaseListObservable } from 'angularfire2/database';
+import { Phone } from '../../models/phone';
 
 @IonicPage()
 @Component({
@@ -9,30 +10,23 @@ import { AngularFireDatabase } from 'angularfire2/database';
   templateUrl: 'phoneDetails.html',
 })
 export class PhoneDetailsPage {
-  selectedPhone: any;
+  selectedPhone = {} as Phone;
+  userCartRef$: FirebaseListObservable<Phone[]>
+
   constructor(private afAuth: AngularFireAuth, private afDb: AngularFireDatabase, public navCtrl: NavController, public navParams: NavParams, private toast: ToastController) {
     this.selectedPhone = navParams.get('phone');
-    console.log(this.selectedPhone);
+    this.afAuth.authState.subscribe(data => {
+      this.userCartRef$ = this.afDb.list<any>('/users/' + data.uid + '/cart');
+    });
   }
 
   addToCart() {
-    this.afAuth.authState.subscribe(data => {      
-      let userRef = this.afDb.list<any>('/users/' + data.uid);
-      userRef.update(
-        'cart',
-        { empty : false,
-          contents: {}
-        }
-      );
-    });
-    this.toast.create({
+    this.userCartRef$.push( //update user cart reference with phone
+      this.selectedPhone
+    );
+    this.toast.create({ //show message that phone has been added
       message: `You've added ${this.selectedPhone.model} to your cart.`,
       duration: 3000
     }).present();
   }
-
-  ionViewDidLoad() {
-
-  }
-
 }

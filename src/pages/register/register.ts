@@ -23,23 +23,17 @@ export class RegisterPage {
   constructor(private afDb: AngularFireDatabase, private afAuth: AngularFireAuth, public navCtrl: NavController, public navParams: NavParams) {
   }
 
-  ionViewDidLoad() {
-    console.log('ionViewDidLoad RegisterPage');
-  }
-
   async register(user: User) {
     try { //await for response
       await this.afAuth.auth.createUserWithEmailAndPassword(user.email, user.password).then(
         newUser => {
           console.log(newUser); //grab user info. for testing, make sure works
           if(newUser) { //If User created
-            this.afDb.list<any>('/users').update(  //create user reference in db with empty cart
+            this.afDb.list<any>('/users').update(  //create user reference in db with empty cart reference
               newUser.uid,
-              { email : user.email,
-              cart : { empty : true }
-              }
+              { email : user.email }
             );
-            newUser.sendEmailVerification().then(function() { //send verification email
+            newUser.sendEmailVerification().then(function() { //Send verification email
               console.log("Verification Email Sent");
             }).catch(function(e) {
               console.log(e);
@@ -47,7 +41,7 @@ export class RegisterPage {
           }
         }
       )
-      this.navCtrl.setRoot(LoginPage); //Go to Login Page
+      this.navCtrl.setRoot(LoginPage); //Navigate to Login Page
     }
     catch(e) {
       console.log(e);
