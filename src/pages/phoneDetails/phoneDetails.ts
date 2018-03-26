@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, ToastController } from 'ionic-angular';
 import { AngularFireAuth } from 'angularfire2/auth';
-import { AngularFireDatabase, FirebaseListObservable } from 'angularfire2/database';
+import { AngularFireDatabase, AngularFireList } from 'angularfire2/database';
 import { Phone } from '../../models/phone';
 
 @IonicPage()
@@ -11,12 +11,12 @@ import { Phone } from '../../models/phone';
 })
 export class PhoneDetailsPage {
   selectedPhone = {} as Phone;
-  userCartRef$: FirebaseListObservable<Phone[]>
+  userCartRef$ : AngularFireList<Phone[]>
 
   constructor(private afAuth: AngularFireAuth, private afDb: AngularFireDatabase, public navCtrl: NavController, public navParams: NavParams, private toast: ToastController) {
     this.selectedPhone = navParams.get('phone');
     this.afAuth.authState.subscribe(data => {
-      this.userCartRef$ = this.afDb.list<any>('/users/' + data.uid + '/cart');
+      this.userCartRef$ = this.afDb.list<Phone>('/users/' + data.uid + '/cart');
     });
   }
 

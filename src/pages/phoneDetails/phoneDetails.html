@@ -13,7 +13,7 @@
   <h3 text-center font-size-large *ngIf="selectedPhone">
     {{selectedPhone.model}}
   </h3>
-  <img [src]="selectedPhone.pic1" width="200" height="200">  
+  <img [src]="selectedPhone.pic1" width="200" height="200">
   <ion-list>
     <ion-list-header>
       {{selectedPhone.model}} Information
@@ -43,6 +43,6 @@
     Price: ${{selectedPhone.price}}
   </h2>
   <button ion-button block color="secondary" (click)="addToCart()">
-    Add To Cart
+    Buy
   </button>
 </ion-content>
