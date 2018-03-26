@@ -3,7 +3,7 @@ import { NavController, NavParams } from 'ionic-angular';
 import { AngularFireDatabase, FirebaseListObservable } from 'angularfire2/database';
 import { PhoneDetailsPage } from '../phoneDetails/phoneDetails';
 import { Phone } from '../../models/phone';
-import { Observable } from 'rxjs/Rx';
+//import { Observable } from 'rxjs/Rx';
 
 
 @Component({
