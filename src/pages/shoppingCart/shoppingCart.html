@@ -16,10 +16,14 @@
       Phones currently in Cart:
     </ion-list-header>
     <ion-item *ngFor="let phone of cartRef | async">
-      <ion-item-divider font-size-small>
+      <ion-item-divider>
         {{phone.model}}
       </ion-item-divider>
       <p font-size-small>{{phone.description}}<br>Price: ${{phone.price}}</p>
     </ion-item>
   </ion-list>
+  <ion-item>
+    <div item-start>Items in Cart: {{cartSize}}</div>
+    <div item-end>Total Cost: ${{totalCost}}</div>
+  </ion-item>
 </ion-content>

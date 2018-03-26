@@ -18,6 +18,9 @@
       Available Phones
     </ion-list-header>
     <button ion-item *ngFor="let phone of phones | async" (click)="pushPhoneDetails($event, phone)">
+      <ion-thumbnail item-start>
+        <img [src]="phone.pic1">
+      </ion-thumbnail>      
       <h1 font-size-large>{{phone.model}}</h1>
       <div class="phoneSerial">
         Serial #: {{phone.serialNumber}}

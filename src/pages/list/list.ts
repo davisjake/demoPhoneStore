@@ -11,12 +11,12 @@ import { Observable } from 'rxjs/Rx';
   templateUrl: 'list.html'
 })
 export class ListPage {
-  phones : Observable<any[]>;
-  phoneListRef$: FirebaseListObservable<Phone[]>
+  phones : Observable<Phone[]>;
+  //phoneListRef$: FirebaseListObservable<Phone[]>
 
   constructor(private afDb: AngularFireDatabase, public navCtrl: NavController, public navParams: NavParams) {
     this.phones = this.afDb.list('phones').valueChanges();
-    this.phoneListRef$ = this.afDb.list('phones');
+    //this.phoneListRef$ = this.afDb.list('phones');
   }
 
   pushPhoneDetails(event, phone) { //push phoneDetialPage when phone clicked from list
