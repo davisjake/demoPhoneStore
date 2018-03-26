@@ -15,10 +15,6 @@ export class LoginPage {
   constructor(private afAuth: AngularFireAuth, public navCtrl: NavController, public navParams: NavParams) {
   }
 
-  ionViewDidLoad() {
-    console.log('ionViewDidLoad LoginPage');
-  }
-
   async login(user: User) { //Uses promise so set as async
     try {
       await this.afAuth.auth.signInWithEmailAndPassword(user.email, user.password)
