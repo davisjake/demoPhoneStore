@@ -5,13 +5,6 @@ import { LoginPage } from '../login/login';
 import { AngularFireDatabase } from 'angularfire2/database';
 import { AngularFireAuth } from 'angularfire2/auth'; //should abstract to service for production app
 
-/**
- * Generated class for the RegisterPage page.
- *
- * See https://ionicframework.com/docs/components/#navigation for more info on
- * Ionic pages and navigation.
- */
-
 @IonicPage()
 @Component({
   selector: 'page-register',
@@ -49,7 +42,7 @@ export class RegisterPage {
         alert('Input is Invalid');
       }
       else {
-        alert(e); //make into function that changes html
+        alert(e);
       }
     }
   }
