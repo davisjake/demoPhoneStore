@@ -3,8 +3,6 @@ import { Nav, Platform } from 'ionic-angular';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 
-import { ShoppingCartPage } from '../pages/shoppingCart/shoppingCart';
-import { ListPage } from '../pages/list/list';
 import { LoginPage } from '../pages/login/login';
 
 @Component({
@@ -19,13 +17,6 @@ export class MyApp {
 
   constructor(public platform: Platform, public statusBar: StatusBar, public splashScreen: SplashScreen) {
     this.initializeApp();
-
-    // used for an example of ngFor and navigation
-    this.pages = [
-      { title: 'List', component: ListPage },
-      { title: 'Cart', component: ShoppingCartPage }
-    ];
-
   }
 
   initializeApp() {

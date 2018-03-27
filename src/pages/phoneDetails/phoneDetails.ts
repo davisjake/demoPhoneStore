@@ -11,17 +11,17 @@ import { Phone } from '../../models/phone';
 })
 export class PhoneDetailsPage {
   selectedPhone = {} as Phone;
-  userCartRef$ : AngularFireList<Phone[]>
+  userCartRef : AngularFireList<Phone>;
 
   constructor(private afAuth: AngularFireAuth, private afDb: AngularFireDatabase, public navCtrl: NavController, public navParams: NavParams, private toast: ToastController) {
     this.selectedPhone = navParams.get('phone');
     this.afAuth.authState.subscribe(data => {
-      this.userCartRef$ = this.afDb.list<Phone>('/users/' + data.uid + '/cart');
+      this.userCartRef = this.afDb.list<Phone>('/users/' + data.uid + '/cart');
     });
   }
 
   addToCart() {
-    this.userCartRef$.push( //update user cart reference with phone
+    this.userCartRef.push( //update user cart reference with phone
       this.selectedPhone
     );
     this.toast.create({ //show message that phone has been added

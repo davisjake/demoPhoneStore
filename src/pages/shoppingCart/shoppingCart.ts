@@ -1,8 +1,9 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
-import { AngularFireDatabase, AngularFireList } from 'angularfire2/database';
+import { AngularFireDatabase } from 'angularfire2/database';
 import { AngularFireAuth } from 'angularfire2/auth';
 import { Phone } from '../../models/phone';
+import { Observable } from 'rxjs/Rx';
 
 @IonicPage()
 @Component({
@@ -10,9 +11,9 @@ import { Phone } from '../../models/phone';
   templateUrl: 'shoppingCart.html',
 })
 export class ShoppingCartPage {
-  cartRef$ : AngularFireList<Phone[]>;
-  cartSize : number;
-  totalCost : number;
+  cartRef : Observable<Phone[]>;
+  cartSize : Number;
+  totalCost : Number;
 
   constructor(private afAuth: AngularFireAuth, private afDb: AngularFireDatabase, public navCtrl: NavController, public navParams: NavParams) {
     this.totalCost = 0; //set total cost and cart size to 0 as default
@@ -24,8 +25,10 @@ export class ShoppingCartPage {
         phonesInCartRef.forEach(function(phone) { //set cost of all items by looping through cart
           this.totalCost += phone.price;
         }, this);
+        this.totalCost = Number(this.totalCost.toFixed(2));
       });
     });
+
   }
 
 }

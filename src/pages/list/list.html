@@ -1,8 +1,5 @@
 <ion-header>
-  <ion-navbar color="primary">
-    <button ion-button menuToggle>
-      <ion-icon name="menu"></ion-icon>
-    </button>
+  <ion-navbar color="primary">    
     <ion-title>Demo Phone Store Application</ion-title>
     <ion-buttons end>
       <button navPush="ShoppingCartPage" ion-button>
@@ -17,7 +14,7 @@
     <ion-list-header>
       Available Phones
     </ion-list-header>
-    <button ion-item *ngFor="let phone of phoneListRef$ | async" (click)="pushPhoneDetails($event, phone)">
+    <button ion-item *ngFor="let phone of phoneListRef | async" (click)="pushPhoneDetails($event, phone)">
       <ion-thumbnail item-start>
         <img [src]="phone.pic1">
       </ion-thumbnail>
